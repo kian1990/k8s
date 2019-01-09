@@ -1,3 +1,5 @@
+#!/bin/bash
+
 apt-get update && apt-get install -y apt-transport-https curl wget
 wget -qO- https://get.docker.com/ | sh
 curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
