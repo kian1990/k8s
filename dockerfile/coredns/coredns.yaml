@@ -107,14 +107,14 @@ spec:
         seccomp.security.alpha.kubernetes.io/pod: 'docker/default'
     spec:
       serviceAccountName: coredns
-      tolerations:
-      - key: "CriticalAddonsOnly"
-        operator: "Exists"
-      - key: "master"
-        operator: "Equal"
-        value: "master"
-      nodeSelector:
-        master: "master"
+#       tolerations:
+#       - key: "CriticalAddonsOnly"
+#         operator: "Exists"
+#       - key: "master"
+#         operator: "Equal"
+#         value: "master"
+#       nodeSelector:
+#         master: "master"
       containers:
       - name: coredns
         image: gcr.io/google-containers/coredns:1.2.6
