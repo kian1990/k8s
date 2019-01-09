@@ -11,12 +11,12 @@ spec:
         task: monitoring
         k8s-app: grafana
     spec:
-      tolerations:
-      - key: "master"
-        operator: "Equal"
-        value: "master"
-      nodeSelector:
-        master: "master"
+#       tolerations:
+#       - key: "master"
+#         operator: "Equal"
+#         value: "master"
+#       nodeSelector:
+#         master: "master"
       containers:
       - name: grafana
         image: gcr.io/google-containers/heapster-grafana-amd64:v5.0.4
