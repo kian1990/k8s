@@ -107,12 +107,12 @@ spec:
       labels:
         k8s-app: kubernetes-dashboard
     spec:
-      tolerations:
-      - key: "master"
-        operator: "Equal"
-        value: "master"
-      nodeSelector:
-        master: "master"
+#       tolerations:
+#       - key: "master"
+#         operator: "Equal"
+#         value: "master"
+#       nodeSelector:
+#         master: "master"
       containers:
       - name: kubernetes-dashboard
         image: gcr.io/google-containers/kubernetes-dashboard-amd64:v1.10.1
