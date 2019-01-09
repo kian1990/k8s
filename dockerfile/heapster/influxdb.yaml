@@ -11,12 +11,12 @@ spec:
         task: monitoring
         k8s-app: influxdb
     spec:
-      tolerations:
-      - key: "master"
-        operator: "Equal"
-        value: "master"
-      nodeSelector:
-        master: "master"
+#       tolerations:
+#       - key: "master"
+#         operator: "Equal"
+#         value: "master"
+#       nodeSelector:
+#         master: "master"
       containers:
       - name: influxdb
         image: gcr.io/google-containers/heapster-influxdb-amd64:v1.5.2
