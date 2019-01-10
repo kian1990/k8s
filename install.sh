@@ -16,11 +16,26 @@ cat <<EOF >/etc/default/kubelet
 KUBELET_EXTRA_ARGS="--pod-infra-container-image=k8s.gcr.io/pause:3.1 --fail-swap-on=false"
 EOF
 
-#启动docker和k8s组件
-systemctl start docker
-systemctl start kubelet
+#安装nginx
+apt-get update && apt-get install -y nginx
+
+cat <<EOF >/etc/nginx/sites-available/default
+server {
+    listen       80;
+    server_name  localhost;
+    location / {
+        proxy_pass   http://127.0.0.1:30000;
+    }
+}
+EOF
+
+#启动服务
+systemctl restart docker
+systemctl restart kubelet
+systemctl restart nginx
 systemctl enable docker
 systemctl enable kubelet
+systemctl enable nginx
 
 # docker pull k8s.gcr.io/kube-apiserver:v1.13.1
 # docker pull k8s.gcr.io/kube-controller-manager:v1.13.1
