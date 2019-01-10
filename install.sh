@@ -122,3 +122,8 @@ sleep 30
 
 #查看容器运行状态
 kubectl get pods,service --all-namespaces
+
+# vim /etc/kubernetes/manifests/kube-apiserver.yaml
+# --service-node-port-range=10000-60000
+# kubectl delete -f /etc/kubernetes/manifests/kube-apiserver.yaml
+# kubectl create -f /etc/kubernetes/manifests/kube-apiserver.yaml
