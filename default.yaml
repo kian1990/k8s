@@ -1,42 +1,40 @@
----
-  
+# ------------------- Deployment ------------------- #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: name
+  name: name
 spec:
-   replicas: 1
-   selector:
-      matchLabels:
-         app: name
-   template:
-      metadata:
-         labels:
-            app: name
-      spec:
-         containers:
-         - name: name
-           image: name:version
-           ports:
-           - containerPort: 1234
-           volumeMounts:
-           - name: time
-             mountPath: /etc/localtime
-         volumes:
-         - name: time
-           hostPath:
-             path: /usr/share/zoneinfo/Asia/Shanghai
+  selector:
+    matchLabels:
+      app: name
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: name
+    spec:
+      containers:
+      - name: name
+        image: name:version
+        ports:
+        - containerPort: 1234
+        volumeMounts:
+          - name: time
+            mountPath: /etc/localtime
+      volumes:
+      - name: time
+        hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
 
----
-
+# ------------------- Service ------------------- #
 apiVersion: v1
 kind: Service
 metadata:
-   name: name
+  name: name
 spec:
-   type: NodePort
-   ports:
-      - port: 1234
-        nodePort: 10000
-   selector:
-      app: name
+  type: NodePort
+  ports:
+    - port: 1234
+      nodePort: 10000
+  selector:
+    app: name
