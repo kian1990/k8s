@@ -1,4 +1,5 @@
 # ------------------- Deployment ------------------- #
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,6 +30,7 @@ spec:
           path: /usr/share/zoneinfo/Asia/Shanghai
 
 # ------------------- Service ------------------- #
+---
 apiVersion: v1
 kind: Service
 metadata:
