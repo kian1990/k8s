@@ -95,7 +95,7 @@ docker load < flannel-v0.10.0-amd64.tar
 #修改apiserver为自己的IP地址
 kubeadm init \
    --kubernetes-version=v1.13.1 \
-   --pod-network-cidr=10.0.0.0/16 \
+   --pod-network-cidr=10.244.0.0/16 \
    --apiserver-advertise-address=192.168.0.81 \
    --ignore-preflight-errors=Swap
 
@@ -111,7 +111,6 @@ sleep 60
 #创建容器
 kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/kube-flannel.yml
 kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/kubernetes-dashboard/kubernetes-dashboard.yaml
-kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/coredns/coredns.yaml
 kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/heapster/grafana.yaml
 kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/heapster/heapster-rbac.yaml
 kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/heapster/heapster.yaml
