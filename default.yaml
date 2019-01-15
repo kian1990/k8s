@@ -16,6 +16,8 @@ spec:
       containers:
       - name: name
         image: name:version
+        # command: ["printenv"]
+        # args: ["HOSTNAME", "KUBERNETES_PORT"]  
         ports:
         - containerPort: 1234
         volumeMounts:
