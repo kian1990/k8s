@@ -37,10 +37,10 @@ systemctl enable docker
 systemctl enable kubelet
 systemctl enable nginx
 
-# docker pull k8s.gcr.io/kube-apiserver:v1.13.1
-# docker pull k8s.gcr.io/kube-controller-manager:v1.13.1
-# docker pull k8s.gcr.io/kube-scheduler:v1.13.1
-# docker pull k8s.gcr.io/kube-proxy:v1.13.1
+# docker pull k8s.gcr.io/kube-apiserver:v1.13.2
+# docker pull k8s.gcr.io/kube-controller-manager:v1.13.2
+# docker pull k8s.gcr.io/kube-scheduler:v1.13.2
+# docker pull k8s.gcr.io/kube-proxy:v1.13.2
 # docker pull k8s.gcr.io/pause:3.1
 # docker pull k8s.gcr.io/etcd:3.2.24
 # docker pull k8s.gcr.io/coredns:1.2.6
@@ -50,10 +50,10 @@ systemctl enable nginx
 # docker pull gcr.io/google-containers/heapster-grafana-amd64:v5.0.4
 # docker pull quay.io/coreos/flannel:v0.10.0-amd64
 
-# docker save k8s.gcr.io/kube-apiserver:v1.13.1 > kube-apiserver-v1.13.1.tar
-# docker save k8s.gcr.io/kube-controller-manager:v1.13.1 > kube-controller-manager-v1.13.1.tar
-# docker save k8s.gcr.io/kube-scheduler:v1.13.1 > kube-scheduler-v1.13.1.tar
-# docker save k8s.gcr.io/kube-proxy:v1.13.1 > kube-proxy-v1.13.1.tar
+# docker save k8s.gcr.io/kube-apiserver:v1.13.2 > kube-apiserver-v1.13.2.tar
+# docker save k8s.gcr.io/kube-controller-manager:v1.13.2 > kube-controller-manager-v1.13.2.tar
+# docker save k8s.gcr.io/kube-scheduler:v1.13.2 > kube-scheduler-v1.13.2.tar
+# docker save k8s.gcr.io/kube-proxy:v1.13.2 > kube-proxy-v1.13.2.tar
 # docker save k8s.gcr.io/pause:3.1 > pause-3.1.tar
 # docker save k8s.gcr.io/etcd:3.2.24 > etcd-3.2.24.tar
 # docker save k8s.gcr.io/coredns:1.2.6 > coredns-1.2.6.tar
@@ -64,10 +64,10 @@ systemctl enable nginx
 # docker save quay.io/coreos/flannel:v0.10.0-amd64 > flannel-v0.10.0-amd64.tar
 
 #下载docker镜像
-wget http://www.monsterk.cn/file/kube-apiserver-v1.13.1.tar
-wget http://www.monsterk.cn/file/kube-controller-manager-v1.13.1.tar
-wget http://www.monsterk.cn/file/kube-scheduler-v1.13.1.tar
-wget http://www.monsterk.cn/file/kube-proxy-v1.13.1.tar
+wget http://www.monsterk.cn/file/kube-apiserver-v1.13.2.tar
+wget http://www.monsterk.cn/file/kube-controller-manager-v1.13.2.tar
+wget http://www.monsterk.cn/file/kube-scheduler-v1.13.2.tar
+wget http://www.monsterk.cn/file/kube-proxy-v1.13.2.tar
 wget http://www.monsterk.cn/file/pause-3.1.tar
 wget http://www.monsterk.cn/file/etcd-3.2.24.tar
 wget http://www.monsterk.cn/file/coredns-1.2.6.tar
@@ -78,10 +78,10 @@ wget http://www.monsterk.cn/file/heapster-grafana-amd64-v5.0.4.tar
 wget http://www.monsterk.cn/file/flannel-v0.10.0-amd64.tar
 
 #导入docker镜像
-docker load < kube-apiserver-v1.13.1.tar
-docker load < kube-controller-manager-v1.13.1.tar
-docker load < kube-scheduler-v1.13.1.tar
-docker load < kube-proxy-v1.13.1.tar
+docker load < kube-apiserver-v1.13.2.tar
+docker load < kube-controller-manager-v1.13.2.tar
+docker load < kube-scheduler-v1.13.2.tar
+docker load < kube-proxy-v1.13.2.tar
 docker load < pause-3.1.tar
 docker load < etcd-3.2.24.tar
 docker load < coredns-1.2.6.tar
@@ -94,7 +94,7 @@ docker load < flannel-v0.10.0-amd64.tar
 #使用kubeadm初始化
 #修改apiserver为自己的IP地址
 kubeadm init \
-   --kubernetes-version=v1.13.1 \
+   --kubernetes-version=v1.13.2 \
    --pod-network-cidr=10.244.0.0/16 \
    --apiserver-advertise-address=192.168.0.81 \
    --ignore-preflight-errors=Swap
@@ -107,6 +107,14 @@ kubectl taint nodes ubuntu node-role.kubernetes.io/master-
 
 echo "waiting 60s for start..."
 sleep 60
+
+# 重新安装
+# kubeadm reset
+# ifconfig cni0 down
+# ip link delete cni0
+# ifconfig flannel.1 down
+# ip link delete flannel.1
+# rm -rf /var/lib/cni/
 
 #创建容器
 kubectl create -f https://raw.githubusercontent.com/kian1990/k8s/master/dockerfile/kube-flannel.yml
@@ -123,6 +131,4 @@ sleep 30
 kubectl get pods,service --all-namespaces
 
 # vim /etc/kubernetes/manifests/kube-apiserver.yaml
-# --service-node-port-range=10000-60000
-# kubectl delete -f /etc/kubernetes/manifests/kube-apiserver.yaml
-# kubectl create -f /etc/kubernetes/manifests/kube-apiserver.yaml
+# - --service-node-port-range=10000-60000
