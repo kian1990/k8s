@@ -1,0 +1,27 @@
+FROM ubuntu:18.04
+
+RUN rm -rf /etc/apt/sources.list
+COPY sources.list /etc/apt/
+COPY Shanghai /etc/localtime
+RUN echo "Asia/Shanghai" >  /etc/timezone
+RUN apt-get update && apt-get install -y wget language-pack-zh-hans
+
+RUN wget -P /tmp http://192.168.0.88/app/Linux/jre-8u191-linux-x64.tar.gz
+RUN wget -P /tmp http://192.168.0.88/app/Linux/apache-tomcat-8.0.53.tar.gz
+RUN tar zxvf /tmp/jre-8u191-linux-x64.tar.gz -C /tmp && mv /tmp/jre1.8.0_191 /usr/local/jre
+RUN tar zxvf /tmp/apache-tomcat-8.0.53.tar.gz -C /tmp && mv /tmp/apache-tomcat-8.0.53 /usr/local/tomcat
+RUN mkdir /usr/local/tomcat/apps
+RUN rm -rf /usr/local/tomcat/webapps/*
+RUN rm -rf /tmp/*
+RUN apt-get remove -y wget && apt-get clean
+
+ENV TZ=Asia/Shanghai
+ENV LC_ALL zh_CN.UTF-8
+ENV LANG zh_CN.UTF-8
+ENV LANGUAGE zh_CN
+ENV JAVA_HOME /usr/local/jre
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin
+
+EXPOSE 8080
+ENTRYPOINT ["catalina.sh","run"]
