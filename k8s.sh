@@ -5,21 +5,21 @@ apt-get update && apt-get install -y apt-transport-https curl wget
 wget -qO- https://get.docker.com/ | sh
 curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
 
-cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+cat <<"EOF" >/etc/apt/sources.list.d/kubernetes.list
 deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
 #安装k8s组件
 apt-get update && apt-get install -y kubelet kubeadm kubectl
 
-cat <<EOF >/etc/default/kubelet
+cat <<"EOF" >/etc/default/kubelet
 KUBELET_EXTRA_ARGS="--pod-infra-container-image=k8s.gcr.io/pause:3.1 --fail-swap-on=false"
 EOF
 
 #安装nginx
 apt-get update && apt-get install -y nginx
 
-cat <<EOF >/etc/nginx/sites-available/default
+cat <<"EOF" >/etc/nginx/sites-available/default
 server {
     listen       80;
     server_name  localhost;
