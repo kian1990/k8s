@@ -132,3 +132,7 @@ kubectl get pods,service --all-namespaces
 
 # vim /etc/kubernetes/manifests/kube-apiserver.yaml
 # - --service-node-port-range=10000-60000
+
+# vim /var/lib/kubelet/config.yaml
+# readOnlyPort: 10255
+# systemctl restart kubelet
