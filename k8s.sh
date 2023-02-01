@@ -1,3 +1,4 @@
+#ubuntu 18.04 使用 kubeadm 快速部署 kubernetes 1.13.2
 #!/bin/bash
 
 #安装docker
