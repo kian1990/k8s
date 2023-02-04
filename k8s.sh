@@ -89,7 +89,7 @@ wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/re
 kubectl apply -f recommended.yaml
 
 添加管理员权限
-
+wget https://raw.githubusercontent.com/kian1990/k8s/master/admin-user.yaml
 kubectl apply -f admin-user.yaml
 
 官方文档
