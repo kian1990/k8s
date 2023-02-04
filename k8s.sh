@@ -88,6 +88,10 @@ wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/re
 # 编辑recommended.yaml实现http免密登录，参考https://raw.githubusercontent.com/kian1990/k8s/master/recommended.yaml
 kubectl apply -f recommended.yaml
 
+添加管理员权限
+
+kubectl apply -f admin-user.yaml
+
 官方文档
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
