@@ -14,3 +14,5 @@ registry.k8s.io/kube-proxy:v1.26.1
 registry.k8s.io/pause:3.9
 registry.k8s.io/etcd:3.5.6-0
 registry.k8s.io/coredns/coredns:v1.9.3
+
+https://www.facebook.com/livekian
