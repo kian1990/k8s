@@ -34,7 +34,6 @@ apt-get update
 apt-get install -y kubelet kubeadm kubectl
 systemctl enable --now kubelet
 
-安装Kubernetes
 生成并编辑containerd配置文件
 containerd config default | tee /etc/containerd/config.toml
 # 使用阿里源替换不可访问的国外源
