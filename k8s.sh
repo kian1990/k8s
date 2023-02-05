@@ -16,7 +16,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/
 # 添加docker源
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt-get update
-# 安装dokcer和容器运行时等
+# 安装dokcer
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 # 运行docker，并加入开机启动
 systemctl enable --now docker
