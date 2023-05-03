@@ -1,0 +1,44 @@
+# ------------------- Deployment ------------------- #
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7.0
+        # command: ["printenv"]
+        # args: ["HOSTNAME", "KUBERNETES_PORT"]  
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+          - name: time
+            mountPath: /etc/localtime
+      volumes:
+      - name: time
+        hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
+
+# ------------------- Service ------------------- #
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      nodePort: 30001
+  selector:
+    app: redis
