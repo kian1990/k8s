@@ -63,6 +63,9 @@ systemctl enable --now kubelet
 #根据环境配置你的--pod-network-cidr和--apiserver-advertise-address的值,不能与已有的网络重复
 kubeadm init --apiserver-advertise-address=192.168.2.10 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16
 
+安装失败重置
+kubeadm reset
+
 复制配置文件到当前用户目录
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
